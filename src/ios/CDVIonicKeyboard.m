@@ -79,6 +79,7 @@ NSTimer *hideTimer;
         CGRect wf = self.webView.frame;
         NSLog(@"CDVIonicKeyboard: f height %0.4f", f.size.height);
         NSLog(@"CDVIonicKeyboard: wf y %0.4f", wf.origin.y);
+        [self.webView setFrame:CGRectMake(wf.origin.x, wf.origin.y, f.size.width - wf.origin.x, f.size.height - wf.origin.y + 1)];
     }
     self.hideFormAccessoryBar = [settings cordovaBoolSettingForKey:@"HideKeyboardFormAccessoryBar" defaultValue:YES];
 
@@ -225,14 +226,15 @@ NSTimer *hideTimer;
         }
         case ResizeNative:
         {
-            if (_paddingBottom == 0) {
-                _paddingBottom = -100;
+            if (self.paddingBottom == 0) {
+                _paddingBottom = -10;
+            } else {
+                _paddingBottom = self.paddingBottom;
             }
             [self.webView setFrame:CGRectMake(wf.origin.x, wf.origin.y, f.size.width - wf.origin.x, f.size.height - wf.origin.y - _paddingBottom)];
             NSLog(@"CDVIonicKeyboard: f height %0.4f", f.size.height);
             NSLog(@"CDVIonicKeyboard: wf y %0.4f", wf.origin.y);
-            NSLog(@"CDVIonicKeyboard: new height %0.4f", f.size.height - wf.origin.y - self.paddingBottom - 20);
-            NSLog(@"CDVIonicKeyboard: int height %0.4f", f.size.height - wf.origin.y - _paddingBottom);
+            NSLog(@"CDVIonicKeyboard: new height %0.4f", f.size.height - wf.origin.y - _paddingBottom);
             break;
         }
         default:
