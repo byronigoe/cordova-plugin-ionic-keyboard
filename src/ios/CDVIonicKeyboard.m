@@ -198,7 +198,7 @@ NSTimer *hideTimer;
     if (statusBarHeight == 40) {
         _paddingBottom = _paddingBottom + 20;
     }
-    NSLog(@"CDVIonicKeyboard: updating frame");
+    NSLog(@"CDVIonicKeyboard: updating frame fork");
     NSLog(@"CDVIonicKeyboard: paddingBottom %@", _paddingBottom);
     NSLog(@"CDVIonicKeyboard: statusBarHeight %@", statusBarHeight);
     // NOTE: to handle split screen correctly, the application's window bounds must be used as opposed to the screen's bounds.
