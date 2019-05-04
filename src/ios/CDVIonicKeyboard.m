@@ -75,10 +75,10 @@ NSTimer *hideTimer;
             }
         }
         NSLog(@"CDVIonicKeyboard: resize mode %d", (int)self.keyboardResizes);
-        CGRect f = [[[[UIApplication sharedApplication] delegate] window] bounds];
-        CGRect wf = self.webView.frame;
-        NSLog(@"CDVIonicKeyboard: f height %0.4f", f.size.height);
-        NSLog(@"CDVIonicKeyboard: wf y %0.4f", wf.origin.y);
+        // CGRect f = [[[[UIApplication sharedApplication] delegate] window] bounds];
+        // CGRect wf = self.webView.frame;
+        // NSLog(@"CDVIonicKeyboard: f height %0.4f", f.size.height);
+        // NSLog(@"CDVIonicKeyboard: wf y %0.4f", wf.origin.y);
     }
     self.hideFormAccessoryBar = [settings cordovaBoolSettingForKey:@"HideKeyboardFormAccessoryBar" defaultValue:YES];
 
@@ -203,8 +203,8 @@ NSTimer *hideTimer;
         _paddingBottom = _paddingBottom + 20;
     }
     NSLog(@"CDVIonicKeyboard: updating frame fork");
-    NSLog(@"CDVIonicKeyboard: paddingBottom %zd", _paddingBottom);
-    NSLog(@"CDVIonicKeyboard: statusBarHeight %zd", statusBarHeight);
+    NSLog(@"CDVIonicKeyboard: paddingBottom %d", _paddingBottom);
+    NSLog(@"CDVIonicKeyboard: statusBarHeight %d", statusBarHeight);
     // NOTE: to handle split screen correctly, the application's window bounds must be used as opposed to the screen's bounds.
     CGRect f = [[[[UIApplication sharedApplication] delegate] window] bounds];
     CGRect wf = self.webView.frame;
