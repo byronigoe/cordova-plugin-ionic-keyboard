@@ -192,13 +192,15 @@ NSTimer *hideTimer;
 {
     CGSize statusBarSize = [[UIApplication sharedApplication] statusBarFrame].size;
     int statusBarHeight = MIN(statusBarSize.width, statusBarSize.height);
-    
+
     int _paddingBottom = (int)self.paddingBottom;
-        
+
     if (statusBarHeight == 40) {
         _paddingBottom = _paddingBottom + 20;
     }
     NSLog(@"CDVIonicKeyboard: updating frame");
+    NSLog(@"CDVIonicKeyboard: paddingBottom %@", _paddingBottom);
+    NSLog(@"CDVIonicKeyboard: statusBarHeight %@", statusBarHeight);
     // NOTE: to handle split screen correctly, the application's window bounds must be used as opposed to the screen's bounds.
     CGRect f = [[[[UIApplication sharedApplication] delegate] window] bounds];
     CGRect wf = self.webView.frame;
@@ -220,6 +222,8 @@ NSTimer *hideTimer;
         case ResizeNative:
         {
             [self.webView setFrame:CGRectMake(wf.origin.x, wf.origin.y, f.size.width - wf.origin.x, f.size.height - wf.origin.y - self.paddingBottom)];
+            NSLog(@"CDVIonicKeyboard: f height %@", f.size.height);
+            NSLog(@"CDVIonicKeyboard: wf y %@", wf.origin.y);
             break;
         }
         default:
