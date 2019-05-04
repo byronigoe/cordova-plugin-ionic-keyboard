@@ -235,6 +235,8 @@ NSTimer *hideTimer;
             NSLog(@"CDVIonicKeyboard: f height %0.4f", f.size.height);
             NSLog(@"CDVIonicKeyboard: wf y %0.4f, h %0.4f", wf.origin.y, wf.size.height);
             NSLog(@"CDVIonicKeyboard: new height %0.4f", f.size.height - wf.origin.y - _paddingBottom);
+            CGAffineTransform xform = self.webView.transform;
+            NSLog(@"CDVIonicKeyboard: xform %0.4f %0.4f %0.4f %0.4f %0.4f %0.4f", xform.a, xform.b, xform.c, xform.d, xform.tx, xform.ty);            
             break;
         }
         default:
