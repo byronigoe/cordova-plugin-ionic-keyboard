@@ -199,8 +199,8 @@ NSTimer *hideTimer;
         _paddingBottom = _paddingBottom + 20;
     }
     NSLog(@"CDVIonicKeyboard: updating frame fork");
-    NSLog(@"CDVIonicKeyboard: paddingBottom %@", _paddingBottom);
-    NSLog(@"CDVIonicKeyboard: statusBarHeight %@", statusBarHeight);
+    NSLog(@"CDVIonicKeyboard: paddingBottom %zd", _paddingBottom);
+    NSLog(@"CDVIonicKeyboard: statusBarHeight %zd", statusBarHeight);
     // NOTE: to handle split screen correctly, the application's window bounds must be used as opposed to the screen's bounds.
     CGRect f = [[[[UIApplication sharedApplication] delegate] window] bounds];
     CGRect wf = self.webView.frame;
@@ -222,8 +222,8 @@ NSTimer *hideTimer;
         case ResizeNative:
         {
             [self.webView setFrame:CGRectMake(wf.origin.x, wf.origin.y, f.size.width - wf.origin.x, f.size.height - wf.origin.y - self.paddingBottom)];
-            NSLog(@"CDVIonicKeyboard: f height %@", f.size.height);
-            NSLog(@"CDVIonicKeyboard: wf y %@", wf.origin.y);
+            NSLog(@"CDVIonicKeyboard: f height %0.4f", f.size.height);
+            NSLog(@"CDVIonicKeyboard: wf y %0.4f", wf.origin.y);
             break;
         }
         default:
