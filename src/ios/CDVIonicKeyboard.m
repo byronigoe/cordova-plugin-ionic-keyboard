@@ -227,31 +227,17 @@ NSTimer *hideTimer;
         case ResizeNative:
         {
             if (self.paddingBottom == 0) {
-                _paddingBottom = -20;
+                _paddingBottom = Double.random(in: -100.0 ... 100.0);
             } else {
                 _paddingBottom = self.paddingBottom;
             }
-            // [self.webView setFrame:CGRectMake(wf.origin.x, wf.origin.y, f.size.width - wf.origin.x, f.size.height - wf.origin.y - _paddingBottom)];
+            NSLog(@"CDVIonicKeyboard: random %0.4f", _paddingBottom);
+            [self.webView setFrame:CGRectMake(wf.origin.x, wf.origin.y, f.size.width - wf.origin.x, f.size.height - wf.origin.y - _paddingBottom)];
             NSLog(@"CDVIonicKeyboard: f height %0.4f", f.size.height);
             NSLog(@"CDVIonicKeyboard: wf y %0.4f, h %0.4f", wf.origin.y, wf.size.height);
             NSLog(@"CDVIonicKeyboard: new height %0.4f", f.size.height - wf.origin.y - _paddingBottom);
             CGAffineTransform xform = self.webView.transform;
             NSLog(@"CDVIonicKeyboard: xform %0.4f %0.4f %0.4f %0.4f %0.4f %0.4f", xform.a, xform.b, xform.c, xform.d, xform.tx, xform.ty);
-            //get the rect for the rendered frame
-            // NSRect webFrameRect = [[[webFrame frameView] documentView] frame];
-            //get the rect of the current webview
-            CGRect webViewRect = [webView frame];
-
-            //calculate the new frame
-            NSLog(@"CDVIonicKeyboard: webViewRect %0.4f %0.4f %0.4f %0.4f", webViewRect.origin.x, webViewRect.origin.y, NSWidth(webViewRect), NSHeight(webViewRect));
-            CGRect newWebViewRect = NSMakeRect(webViewRect.origin.x,
-                                               webViewRect.origin.y,
-                                               NSWidth(webViewRect),
-                                               NSHeight(webViewRect) - _paddingBottom);
-            //set the frame
-            [webView setFrame:newWebViewRect];
-
-            NSLog(@"CDVIonicKeyboard: %@",NSStringFromRect(webViewRect));
             break;
         }
         default:
