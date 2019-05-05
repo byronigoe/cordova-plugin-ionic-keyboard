@@ -227,7 +227,7 @@ NSTimer *hideTimer;
         case ResizeNative:
         {
             if (self.paddingBottom == 0) {
-                _paddingBottom = Double.random(in: -100.0 ... 100.0);
+                _paddingBottom = arc4random_uniform(200) - 100;
             } else {
                 _paddingBottom = self.paddingBottom;
             }

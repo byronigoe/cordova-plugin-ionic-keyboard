@@ -17,6 +17,7 @@
  under the License.
  */
 
+#include <stdlib.h>
 #import <Cordova/CDVPlugin.h>
 
 @interface CDVIonicKeyboard : CDVPlugin
