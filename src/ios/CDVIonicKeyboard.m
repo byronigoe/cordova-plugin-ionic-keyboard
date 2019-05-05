@@ -240,11 +240,11 @@ NSTimer *hideTimer;
             //get the rect for the rendered frame
             // NSRect webFrameRect = [[[webFrame frameView] documentView] frame];
             //get the rect of the current webview
-            NSRect webViewRect = [webView frame];
+            CGRect webViewRect = [webView frame];
 
             //calculate the new frame
             NSLog(@"CDVIonicKeyboard: webViewRect %0.4f %0.4f %0.4f %0.4f", webViewRect.origin.x, webViewRect.origin.y, NSWidth(webViewRect), NSHeight(webViewRect));
-            NSRect newWebViewRect = NSMakeRect(webViewRect.origin.x,
+            CGRect newWebViewRect = NSMakeRect(webViewRect.origin.x,
                                                webViewRect.origin.y,
                                                NSWidth(webViewRect),
                                                NSHeight(webViewRect) - _paddingBottom);
