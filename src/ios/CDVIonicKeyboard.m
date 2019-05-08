@@ -39,6 +39,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, readwrite) ResizePolicy keyboardResizes;
 @property (nonatomic, readwrite) BOOL isWK;
 @property (nonatomic, readwrite) int paddingBottom;
+@property (nonatomic, readwrite) int originalPaddingBottom;
 
 @end
 
@@ -77,9 +78,11 @@ NSTimer *hideTimer;
         NSLog(@"CDVIonicKeyboard: resize mode %d", (int)self.keyboardResizes);
         CGRect f = [[[[UIApplication sharedApplication] delegate] window] bounds];
         CGRect wf = self.webView.frame;
-        [self.webView setFrame:CGRectMake(wf.origin.x, wf.origin.y, f.size.width - wf.origin.x, f.size.height - wf.origin.y + 20)];
+        self.originalPaddingBottom = (int) (f.size.height - wf.origin.y - wf.size.height);
+        [self.webView setFrame:CGRectMake(wf.origin.x, wf.origin.y, f.size.width - wf.origin.x, f.size.height - wf.origin.y)];
         NSLog(@"CDVIonicKeyboard: f height %0.4f", f.size.height);
         NSLog(@"CDVIonicKeyboard: wf y %0.4f, h %0.4f", wf.origin.y, wf.size.height);
+        NSLog(@"CDVIonicKeyboard: origPad %0.4f", self.originalPaddingBottom);
     }
     self.hideFormAccessoryBar = [settings cordovaBoolSettingForKey:@"HideKeyboardFormAccessoryBar" defaultValue:YES];
 
@@ -227,17 +230,17 @@ NSTimer *hideTimer;
         case ResizeNative:
         {
             if (self.paddingBottom == 0) {
-                _paddingBottom = arc4random_uniform(200) - 100;
+                _paddingBottom = self.originalPaddingBottom;
             } else {
                 _paddingBottom = self.paddingBottom;
             }
-            NSLog(@"CDVIonicKeyboard: random %0.4f", _paddingBottom);
-            [self.webView setFrame:CGRectMake(wf.origin.x, wf.origin.y, f.size.width - wf.origin.x, f.size.height - wf.origin.y - _paddingBottom)];
+            NSLog(@"CDVIonicKeyboard: pad %d", _paddingBottom);
             NSLog(@"CDVIonicKeyboard: f height %0.4f", f.size.height);
             NSLog(@"CDVIonicKeyboard: wf y %0.4f, h %0.4f", wf.origin.y, wf.size.height);
             NSLog(@"CDVIonicKeyboard: new height %0.4f", f.size.height - wf.origin.y - _paddingBottom);
             CGAffineTransform xform = self.webView.transform;
             NSLog(@"CDVIonicKeyboard: xform %0.4f %0.4f %0.4f %0.4f %0.4f %0.4f", xform.a, xform.b, xform.c, xform.d, xform.tx, xform.ty);
+            [self.webView setFrame:CGRectMake(wf.origin.x, wf.origin.y, f.size.width - wf.origin.x, f.size.height - wf.origin.y - _paddingBottom)];
             break;
         }
         default:
